@@ -1,21 +1,21 @@
-from collections import Counter
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        num_dict = {}
+        
+        for i, num in enumerate(nums):
+            complement = target - num
+            if complement in num_dict:
+                return [num_dict[complement], i]
+            num_dict[num] = i
+        return []
 
-def numTilePossibilities(tiles: str) -> int:
-    def backtrack(counter):
-        total = 0
-        for char in counter:
-            if counter[char] > 0:
-                # Choose the character
-                counter[char] -= 1
-                total += 1  # Count this sequence
-                total += backtrack(counter)  # Explore further
-                # Undo the choice (backtrack)
-                counter[char] += 1
-        return total
-    
-    return backtrack(Counter(tiles))
-
-# Test cases
-print(numTilePossibilities("AAB"))     # Output: 8
-print(numTilePossibilities("AAABBC"))  # Output: 188
-print(numTilePossibilities("V"))       # Output: 1
+# Test case
+nums = [2, 7, 11, 15]
+target = 9
+solution = Solution()
+print(solution.twoSum(nums, target))  # Output: [0, 1]
